@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+
+
+
+
+
+    <style>
+        body {
+            background-color: rgb(45, 6, 82);
+        }
+
+        .container {
+            width: 60%;
+            margin: 80px auto;
+            background: #cfcccc;
+            border-bottom: solid black 1px;
+
+        }
+
+        .header {
+            background: rgb(112, 34, 185);
+            color: white;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+
+
+        }
+
+
+        .circle-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .task {
+            background: rgb(243, 239, 239);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            direction: rtl;
+            border-bottom: 2px solid rgb(36, 36, 36);
+            margin-top: 15px;
+            margin-left: 15px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            transition: box-shadow 0.2s;
+
+        }
+
+        .done {
+            background-color: rgb(153, 253, 160);
+        }
+
+        .task:hover {
+            box-shadow: 0px 3px 15px black;
+        }
+
+
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit {
+            background: rgb(121, 5, 121);
+            color: #ffffff;
+        }
+
+        .complete {
+            background: rgb(0, 73, 0);
+            color: #ffffff;
+        }
+
+        .delete {
+            background: rgb(153, 0, 0);
+            color: #ffffff;
+        }
+
+        .date {
+            background-color: blue;
+            color: white;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        #box {
+            background: white;
+            width: 500px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            direction: rtl;
+        }
+
+        #tex {
+            width: 100%;
+            height: 45px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 0 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .buttons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+        }
+
+        .save {
+            background: #6f22b9;
+        }
+
+        .close {
+            background: #777;
+        }
+
+        #overlaya {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.5);
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        #boxa {
+            background-color: white;
+            width: 500px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px black;
+        }
+
+        #texa {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #747070;
+            border-radius: 8px;
+            padding-right: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(45, 6, 82);">
+
+
+    <div class="container">
+
+        <div class="header">
+            <h1 style="position: relative;left: 500px;">tasks</h1>
+            <button class="circle-btn">
+                <span class="material-symbols-outlined" id="ad">add</span>
+
+            </button>
+
+
+        </div>
+        <div id="tasks">
+            <div class="task">
+                <h3>اسم الكتاب</h3>
+
+
+                <span style="position: absolute;left: 1350px;">10/06/2026</span>
+                <div class="actions">
+                    <button class="circle-btn delete" id="del">
+                        <span class="material-symbols-outlined">delete</span>
+
+                    </button>
+                    <button class="circle-btn complete">
+                        <span class="material-symbols-outlined">check</span>
+
+                    </button>
+                    <button class="circle-btn edit" id="ed">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div id="overlay">
+        <div id="box">
+
+            <h2>new task</h2>
+
+            <input type="text" id="tex" placeholder="write name of task">
+
+            <div class="buttons">
+                <button id="save" class="btn save">save</button>
+                <button id="close" class="btn close">close</button>
+            </div>
+
+        </div>
+    </div>
+    <div id="overlaya">
+        <div id="boxa">
+
+            <h2>edit the name</h2>
+
+            <input type="text" id="texa" placeholder="edit name of task">
+
+            <div class="buttons">
+                <button id="savea" class="btn savea" style="background-color: #6f22b9;">save</button>
+                <button id="closea" class="btn closea" style="background-color: rgb(65, 71, 71);">close</button>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+
+
+    var tasks = [
+        /*{
+            "titel": "قراءة كتاب ",
+            "date": "10/6/2026",
+            "isdone": false,
+
+        },
+        {
+            "titel": "قراءة",
+            "date": "10/6/2026",
+            "isdone": false,
+
+        },
+        {
+            "titel": "انهاء كورس الجاافسكريبت",
+            "date": "10/6/2026",
+            "isdone": true,
+
+        }*/
+    ]
+    document.getElementById("tasks").innerHTML = ""
+
+
+
+
+
+
+
+    function red() {
+        let content = "";
+        for (let i = 0; i < tasks.length; i++) {
+
+
+
+            content += `
+        <div class="task ${tasks[i].isdone ? 'done' : ''}">
+            <div>
+                <h3>${tasks[i].titel}</h3>
+                <span>${tasks[i].date}</span>
+            </div>
+
+            <div class="actions">
+                <button class="circle-btn delete">
+                    <span class="material-symbols-outlined" onclick="deleteTask(${i})">delete</span>
+
+                </button>
+                 
+
+
+                <button class="circle-btn complete">
+                    <span class="material-symbols-outlined" onclick="toggleComplete(${i})">check</span>
+                </button>
+
+                <button class="circle-btn edit" onclick="editTask(${i})">
+                    <span class="material-symbols-outlined">edit</span>
+                </button>
+            </div>
+        </div>
+    `;
+        }
+
+        document.getElementById("tasks").innerHTML = content;
+
+    }
+    red()
+
+
+    document.getElementById("ad").addEventListener("click", function () {
+        document.getElementById("overlay").style.display = "flex";
+    });
+    document.getElementById("save").addEventListener("click", function () {
+
+        let value = document.getElementById("tex").value;
+
+        let now = new Date();
+
+        let date =
+            now.getDate() + "/" +
+            (now.getMonth() + 1) + "/" +
+            now.getFullYear();
+
+        tasks.push({
+            titel: value,
+            date: date,
+            isdone: false
+        });
+
+        red();
+    });
+
+
+    document.getElementById("close").addEventListener("click", function () {
+        document.getElementById("overlay").style.display = "none";
+    });
+
+    function deleteTask(index) {
+        tasks.splice(index, 1);
+        red();
+    }
+
+
+
+    function editTask(index) {
+
+        currentIndex = index;
+
+        document.getElementById("texa").value =
+            tasks[index].titel;
+
+        document.getElementById("overlaya").style.display = "flex";
+    }
+
+
+    document.getElementById("savea").addEventListener("click", function () {
+
+        let newTitle = document.getElementById("texa").value;
+
+        if (newTitle.trim() === "") return;
+
+        tasks[currentIndex].titel = newTitle;
+
+        red();
+
+        document.getElementById("overlaya").style.display = "none";
+    });
+
+    document.getElementById("closea").addEventListener("click", function () {
+        document.getElementById("overlaya").style.display = "none";
+    });
+
+    function toggleComplete(index) {
+        tasks[index].isdone = !tasks[index].isdone;
+        red();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

@@ -1,6 +1,6 @@
 # Tasks App
 
-#### Video Demo:(https://youtu.be/xQppHGdTHK0)
+
 
 ## Description
 
